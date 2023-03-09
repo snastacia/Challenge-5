@@ -1,31 +1,30 @@
- // update time
-function updateTime() {
-  var today = dayjs(); 
+// function to save data input to local storage
+$(function () {
+  
+  $(".saveBtn").on("click", function () {
+    var time = $(this).parent().attr("id");
+    var userInput = $(this).siblings(".description").val();
 
-// updates the time element in the header
-  $("#currentDay").text(today.format("dddd, MMMM DD YYYY, h:mm.ss"));
+    localStorage.setItem(time, userInput);
+  });
 
-//past, present, and future time blocks
-  let now = dayjs().format("hh");
-  for (let i = 0; i < scheduleElArray.length; i++) {
-      scheduleElArray[i].removeClass("future past present");
+  // dayjs variable for current hour
+  var hour = dayjs().hour();
 
-      if (now > scheduleElArray[i].data("hour")) {
-          scheduleElArray[i].addClass("past");
+  //sets saved user data input to that of the text area
+  $(".time-block").each(function () {
+    var chosenTimeBlock = $(this)
+    var id = chosenTimeBlock.attr("id")
+    chosenTimeBlock.children("textarea").val(localStorage.getItem(id));
+  });
 
-      } else if (now === scheduleElArray[i].attr("data-hour")) {
-          scheduleElArray[i].addClass("present");
+  // use dayjs to display the current date in the header of the page
 
-      } else {
+  var currentDate = dayjs();
+  $("#currentDay").text(currentDate.format("dddd, MMMM DD, YYYY"))
+});
 
-          scheduleElArray[i].addClass("future");
-      }
-  }
-}
-
-// textarea elements
-let saveBtn = $(".saveBtn");
-let containerEl = $(".container");
+// text area elements
 let schedule9am = $("#hour-9");
 let schedule10am = $("#hour-10");
 let schedule11am = $("#hour-11");
@@ -36,43 +35,20 @@ let schedule3pm = $("#hour-15");
 let schedule4pm = $("#hour-16");
 let schedule5pm = $("#hour-17");
 
-let scheduleElArray = [
-  schedule9am,
-  schedule10am,
-  schedule11am,
-  schedule12pm,
-  schedule1pm,
-  schedule2pm,
-  schedule3pm,
-  schedule4pm,
-  schedule5pm,
-];
-
-renderLastRegistered();
-updateTime();
-setInterval(updateTime, 1000); 
-
-function renderLastRegistered() {
-  for (let el of scheduleElArray) {
-      el.val(localStorage.getItem("time-block " + el.data("hour")));
-
-  }
+//function to change background based on the hour
+function background () {
+      
+  $(".description").each(function () {
+      var timeTest = parseInt($(this).attr("id"));
+      hour = parseInt(hour);
+      console.log(timeTest);
+      console.log(hour);
+      if (hour > timeTest) {
+          $(this).addClass("past");
+      } else if (hour < timeTest) {
+          $(this).addClass("future");
+      } else {
+          $(this).addClass("present");
+      }
+  });
 }
-
-
-// Click events
-function handleFormSubmit(event) {
-  event.preventDefault();
-
-  let btnClicked = $(event.currentTarget);
-
-  let targetText = btnClicked.siblings("textarea");
-
-  let targetTimeBlock = targetText.data("hour");
-
-  localStorage.setItem("time block " +  targetTimeBlock, targetText.val());
-}
-
-saveBtn.on("click", handleFormSubmit);
-
-
