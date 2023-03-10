@@ -26,37 +26,27 @@ THEN the text for that event is saved in local storage
 WHEN I refresh the page
 THEN the saved events persist
 
-## Table of Contents (Optional)
-
-If your README is long, add a table of contents to make it easy for users to find what they need.
-
-- [Description] (#description)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Credits](#credits)
-- [License](#license)
-
 ## Installation
 
-What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
+No installation required
 
 ## Usage
 
-Provide instructions and examples for use. Include screenshots as needed.
+When a user open the Work Day Scheduler in their browser, they'll be presented with a schedule that includes the current dat e at the top of the webpage. 
 
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
+The schedule will display time blocks for a typical 9am - 5 pm work day, and the user will be able to enter and save notes in their desired time blocks. 
 
-    ```md
-    ![alt text](assets/images/screenshot.png)
-    ```
+When a time block in the scheduler matches the present time the block's background color will change to red. When a time block has yet to happen (future time), the block's background color will be green. Lastly, if a time block has already passed, the block's background color will change to gray. 
+
+Example of present and future time blocks with date at the top: 
+![alt text](file:///Users/nastacias/Desktop/bootcamp/Challenge-5/Assets/Screenshot%202023-03-10%20at%209.17.56%20AM.png)
+
+Example of past time blocks: 
+![alt text](file:///Users/nastacias/Desktop/bootcamp/Challenge-5/Assets/Screenshot%202023-03-10%20at%2011.18.57%20AM.png)
 
 ## Credits
 
-List your collaborators, if any, with links to their GitHub profiles.
-
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
-
-If you followed tutorials, include links to those here as well.
+JavaScript code was written with the assitance of tutor, Katherine Redford. 
 
 ## License
 
